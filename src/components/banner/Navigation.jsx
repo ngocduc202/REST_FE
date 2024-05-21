@@ -10,7 +10,7 @@ import { useUserStore } from 'src/store/useUserStore'
 import { useAppStore } from 'src/store/useAppStore'
 
 const Navigation = ({ location }) => {
-  const { token } = useUserStore()
+  const { current } = useUserStore()
   const { setModal } = useAppStore()
   return (
     <div className={twMerge(clsx('bg-transparent fixed z-50 top-[85px] w-full px-[100px] py-[26px] flex items-center justify-between',
@@ -27,7 +27,7 @@ const Navigation = ({ location }) => {
             {el.text}
           </NavLink>
         ))}
-        {!token ?
+        {!current ?
           <Button className={twMerge(clsx(location.pathname === '/' && 'bg-transparent border-main-100 border'))}
             onClick={() => setModal(true, <Login />)}
           >
