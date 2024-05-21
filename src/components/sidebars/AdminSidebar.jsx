@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from 'react'
 import logo from '../../assets/logo_light.png'
 import { adminSidebar } from 'src/utils/constants'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import clsx from 'clsx'
 import { FaCaretRight } from "react-icons/fa6";
 import { FaCaretDown } from 'react-icons/fa'
+import { RiShareForwardLine } from 'react-icons/ri'
 
 const AdminSidebar = () => {
   const [activeTabs, setActiveTabs] = useState([])
@@ -55,6 +56,10 @@ const AdminSidebar = () => {
                 }
               </>
             )}
+            <Link to={'/'} className='flex items-center gap-2 hover:bg-main-700 hover:border-r-4 border-main-300  px-4 py-3'>
+              <span className='text-2xl'><RiShareForwardLine /></span>
+              <span className='select-none'>Go homepage</span>
+            </Link>
           </Fragment>
         ))}
       </div>

@@ -11,7 +11,6 @@ instance.interceptors.request.use(function (config) {
   if (token.state?.token) config.headers = {
     Authorization: `Bearer ${token.state?.token}`
   }
-  console.log(token)
   return config;
 }, function (error) {
   // Do something with request error
