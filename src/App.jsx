@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { useUserStore } from './store/useUserStore'
 import { AdminLayout, CreatePropertyType, Dashboard, ManagePropertyType } from './pages/admin'
+import { Personal, UserLayout } from './pages/user'
 const App = () => {
   const { isShowModal } = useAppStore()
   const { getCurrent, getRoles, token } = useUserStore()
@@ -30,11 +31,20 @@ const App = () => {
 
         {/* ADMIN ROUTE */}
         <Route path={path.ADMIN_LAYOUT} element={<AdminLayout />}>
-          <Route path={path.DASHBOARD} element={<Dashboard />} />
+          <Route path={path.ADMIN_DASHBOARD} element={<Dashboard />} />
           <Route path={path.CREATE_PROPERTY_TYPE} element={<CreatePropertyType />} />
           <Route path={path.MANAGE_PROPERTY_TYPE} element={<ManagePropertyType />} />
         </Route>
+
+        {/* USER ROUTE */}
+        <Route path={path.USER_LAYOUT} element={<UserLayout />}>
+          <Route path={path.PERSONAL} element={<Personal />} />
+        </Route>
+
       </Routes>
+
+
+
       <ToastContainer
         position="top-right"
         autoClose={5000}

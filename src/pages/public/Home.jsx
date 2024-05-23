@@ -1,5 +1,6 @@
 import React from 'react'
 import banner from "../../assets/banner.png"
+import { Search } from 'src/components'
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
           </span>
         </div>
       </div>
+      <Search />
       <div className='w-main mx-auto'>
         content
       </div>

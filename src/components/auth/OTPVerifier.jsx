@@ -11,7 +11,6 @@ const OTPVerifier = ({ phone, callback }) => {
     setIsLoading(true)
     window.confirmationResult.confirm(otp).then(result => {
       setIsLoading(false)
-      console.log(result)
       callback()
     }).catch(err => {
       setIsLoading(false)
