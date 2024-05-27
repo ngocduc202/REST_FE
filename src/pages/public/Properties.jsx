@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import bannerProperty from '../../assets/bannerProperty.png'
-import { BreadCrumb, Button, InputSelect, PropertyCard } from 'src/components'
+import { BreadCrumb, Button, InputSelect, Pagination, PropertyCard } from 'src/components'
 import { apiGetProperties } from 'src/apis/properties'
 import { useForm } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
 import clsx from 'clsx'
+import { useSearchParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const Properties = () => {
 
@@ -12,16 +14,23 @@ const Properties = () => {
   const [mode, setMode] = useState('ALL')
   const { register, formState: { errors }, watch } = useForm()
   const sort = watch('sort')
+  const [searchParams] = useSearchParams()
 
   useEffect(() => {
-    const fetchProperties = async () => {
-      const response = await apiGetProperties({ limit: 9 })
+    const fetchProperties = async (params) => {
+      const response = await apiGetProperties({
+        limit: 9,
+        ...params
+      })
       if (response.success) {
         setProperties(response.properties)
+      } else {
+        toast.error(response.mes)
       }
     }
-    fetchProperties()
-  }, [])
+    const params = Object.fromEntries([...searchParams])
+    fetchProperties(params)
+  }, [searchParams])
 
 
   return (
@@ -67,6 +76,13 @@ const Properties = () => {
               properties={el}
             />
           ))}
+        </div>
+        <div className='flex items-center justify-center my-4'>
+          <Pagination
+            total={properties?.count}
+            limit={properties?.limit}
+            page={properties?.page}
+          />
         </div>
       </div>
     </div>
